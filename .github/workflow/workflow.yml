@@ -9,7 +9,7 @@ on:
         required: true
         options:
           - root
-          
+          - test
   
 jobs:
   terraform:
@@ -44,14 +44,14 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init 
-      working-directory: ../module/s3
+      working-directory: ./modules_calling
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false 
-      working-directory: ../module/s3
+      working-directory: ./modules_calling
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
       run: terraform apply -auto-approve
-      working-directory: ../module/s3
+      working-directory: ./module_calling
